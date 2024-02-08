@@ -9,6 +9,7 @@ class App extends StatelessWidget {
   /// Creates an instance of [App].
   const App({required this.geminiRepository, super.key});
 
+  /// The Gemini repository.
   final GeminiRepository geminiRepository;
 
   /// Builds the widget tree for [App].

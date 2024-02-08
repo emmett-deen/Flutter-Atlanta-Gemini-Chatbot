@@ -2,8 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:fatl_gemini_chatbot/firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 
 /// [AppBlocObserver] is a custom [BlocObserver] that logs changes and errors

@@ -11,21 +11,28 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'chat_state.dart';
 part 'chat_cubit.freezed.dart';
 
+/// A [Cubit] that manages the state of the chat.
 class ChatCubit extends Cubit<ChatState> {
+  /// Creates a [ChatCubit].
+  ///
+  /// The [geminiRepository] parameter is required.
   ChatCubit({
     required this.geminiRepository,
   }) : super(
           const ChatState.initial(),
         );
 
+  /// The Gemini repository.
   final GeminiRepository geminiRepository;
 
+  /// The current user.
   final ChatUser currentUser = ChatUser(
     id: 'fatl',
     firstName: 'Flutter',
     lastName: 'Atlanta',
   );
 
+  /// The Gemini chatbot user.
   final ChatUser geminiUser = ChatUser(
     id: 'gemini',
     firstName: 'Gemini',
@@ -35,6 +42,7 @@ class ChatCubit extends Cubit<ChatState> {
   StreamSubscription<Either<Failure, List<GeminiMessage>>>?
       _messagesStreamSubscription;
 
+  /// Starts the stream of messages.
   void startMessagesStream() {
     _messagesStreamSubscription = geminiRepository.streamMessages().listen(
       (messagesOrFailure) {
@@ -86,12 +94,18 @@ class ChatCubit extends Cubit<ChatState> {
     return chatMessages..sort((a, b) => b.createdAt.compareTo(a.createdAt));
   }
 
+  /// Closes the [ChatCubit].
+  ///
+  /// Cancels the stream of messages.
   @override
   Future<void> close() {
     _messagesStreamSubscription?.cancel();
     return super.close();
   }
 
+  /// Sends a message.
+  ///
+  /// The [message] parameter is required.
   Future<void> sendMessage(ChatMessage message) async {
     await geminiRepository.sendMessage(message.text).then(
       (failureOrVoid) {
