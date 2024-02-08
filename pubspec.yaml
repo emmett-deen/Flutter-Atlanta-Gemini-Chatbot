@@ -10,6 +10,7 @@ dependencies:
   bloc: ^8.1.2
   cloud_firestore: ^4.15.4
   dartz: ^0.10.1
+  dash_chat_2: ^0.0.20
   firebase_core: ^2.25.4
   flutter:
     sdk: flutter
